@@ -1,0 +1,86 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #f0f7f8;
+  color: #163544;
+  font: 16px/1.45 system-ui, sans-serif;
+}
+main { max-width: 870px; margin: 28px auto; padding: 0 22px; }
+.curso { margin: 0; font-size: .8rem; font-weight: 700; color: #37626d; }
+h1 { margin: 4px 0 18px; font-size: clamp(1.7rem, 5vw, 2.45rem); line-height: 1.14; }
+h2 { margin: 0; font-size: 1.05rem; }
+p { margin: .35rem 0; }
+.laboratorio { display: grid; grid-template-columns: minmax(0, 1fr) 245px; gap: 18px; align-items: start; }
+.pecera {
+  --agua: hsl(199 79% 86%);
+  position: relative;
+  aspect-ratio: 1;
+  border: 2px solid #4c8191;
+  border-radius: 17px;
+  overflow: hidden;
+  background: var(--agua);
+  transition: background-color .65s linear;
+}
+#tablero { position: absolute; inset: 0; display: grid; }
+.celda { border-right: 1px solid #ffffff95; border-bottom: 1px solid #ffffff95; }
+#burbujas {
+  position: absolute;
+  inset: 12px 12px auto;
+  max-height: 39%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 32px);
+  gap: 7px;
+  padding: 4px;
+  overflow: auto;
+}
+.burbuja {
+  width: 31px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: grab;
+  border: 2px solid var(--borde);
+  background: radial-gradient(circle at 32% 27%, white 0 8%, var(--brillo) 21%, var(--acento) 78%);
+  animation: aparecer .35s ease-out;
+}
+.nemo { --acento: #ef7838; --borde: #a74315; --brillo: #ffd3a7; }
+.dory { --acento: #4378d8; --borde: #254eaa; --brillo: #a7d7ff; }
+.arrastrando { opacity: .4; }
+@keyframes aparecer { from { transform: translateY(-12px); opacity: 0; } }
+.zonas { position: absolute; inset: 44% 12px 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.pez {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 2px dashed var(--borde);
+  border-radius: 14px;
+  background: var(--brillo);
+  background: color-mix(in srgb, var(--brillo) 46%, transparent);
+  min-width: 0;
+  padding: 4px;
+}
+.icono-pez { width: 51px; height: 30px; background: var(--acento); border-radius: 52% 59% 59% 52%; position: relative; margin-left: 10px; }
+.icono-pez::before { content: ''; position: absolute; right: 88%; top: 5px; border-left: 17px solid var(--acento); border-block: 10px solid transparent; }
+.icono-pez::after { content: ''; position: absolute; right: 8px; top: 8px; border: 2px solid white; border-radius: 50%; width: 4px; height: 4px; background: #173247; }
+.pez output { font-size: 1.85rem; line-height: 1.15; font-weight: 750; font-variant-numeric: tabular-nums; }
+aside { background: white; border: 1px solid #cee1e5; border-radius: 16px; padding: 15px; }
+aside p, aside a { font-size: .87rem; }
+label { display: block; font-weight: 700; margin-bottom: 7px; }
+.campo { display: flex; gap: 8px; }
+input, button { font: inherit; border-radius: 7px; }
+input { width: 72px; padding: 4px 8px; border: 1px solid #8ba9b1; }
+button { padding: 5px 10px; border: 1px solid #286879; background: #f4fbfc; color: #163544; cursor: pointer; font-size: .88rem; }
+button:hover { background: #dceff2; }
+a { color: #205d72; }
+.acciones { display: grid; justify-items: start; gap: 7px; margin-top: 8px; }
+hr { border: 0; border-top: 1px solid #dae8eb; margin: 13px 0; }
+#mensaje { min-height: 3em; font-weight: 600; }
+@media (max-width: 660px) {
+  .laboratorio { grid-template-columns: 1fr; }
+  main { margin-top: 18px; padding: 0 12px; }
+  .pecera { min-height: 280px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pecera, .burbuja { animation: none; transition: none; }
+}
